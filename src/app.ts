@@ -1,13 +1,14 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import http from "http";
 import { Server as SocketIO } from "socket.io";
+import path from "path";
 
 const app = express();
 const server = http.createServer(app);
 const io = new SocketIO(server);
 
-app.get("/", (req, res) => {
-	res.sendFile(__dirname + "/client/index.html");
+app.get("/", (req:Request, res:Response) => {
+	res.sendFile(path.resolve("./client/index.html"));
 });
 
 io.on("connection", (socket) => {
